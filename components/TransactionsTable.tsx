@@ -27,6 +27,8 @@ const CategoryBadge = ({ category }: CategoryBadgeProps) => {
 } 
 
 const TransactionsTable = ({ transactions }: TransactionTableProps) => {
+  const safeTransactions = Array.isArray(transactions) ? transactions : [];
+
   return (
     <Table>
       <TableHeader className="bg-[#f9fafb]">
@@ -40,7 +42,7 @@ const TransactionsTable = ({ transactions }: TransactionTableProps) => {
         </TableRow>
       </TableHeader>
       <TableBody>
-        {transactions.map((t: Transaction) => {
+        {safeTransactions.map((t: Transaction) => {
           const status = getTransactionStatus(new Date(t.date))
           const amount = formatAmount(t.amount)
 

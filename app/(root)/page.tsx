@@ -4,10 +4,38 @@ import RightSidebar from '@/components/RightSidebar';
 import TotalBalanceBox from '@/components/TotalBalanceBox';
 import { getAccount, getAccounts } from '@/lib/actions/bank.actions';
 import { getLoggedInUser } from '@/lib/actions/user.actions';
+import Link from 'next/link';
 
 const Home = async ({ searchParams: { id, page } }: SearchParamProps) => {
   const currentPage = Number(page as string) || 1;
   const loggedIn = await getLoggedInUser();
+  if (!loggedIn) {
+    return (
+      <section className="flex min-h-screen items-center justify-center p-6">
+        <div className="w-full max-w-xl rounded-2xl border border-gray-200 bg-white p-8 shadow-sm">
+          <h1 className="text-2xl font-semibold text-gray-900">Horizon</h1>
+          <p className="mt-2 text-sm text-gray-600">
+            Sign in to view balances, transactions, and transfer funds.
+          </p>
+
+          <div className="mt-6 flex flex-wrap gap-3">
+            <Link
+              href="/sign-in"
+              className="rounded-xl bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/sign-up"
+              className="rounded-xl border border-gray-300 px-4 py-2 text-sm font-semibold text-gray-900 hover:bg-gray-50"
+            >
+              Create account
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
   const accounts = await getAccounts({ 
     userId: loggedIn.$id 
   })
