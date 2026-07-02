@@ -63,7 +63,7 @@ npm start
 ## 🔒 Environment Variables (Important)
 
 This project uses environment variables to store sensitive data.
-
+<!-- 
 ### 1. Create Environment File
 
 ```bash
@@ -102,7 +102,7 @@ Edit `.env.local` and add:
 * Use sandbox keys for development
 * Rotate keys if exposed
 
----
+--- -->
 
 ## 📂 Project Structure
 
